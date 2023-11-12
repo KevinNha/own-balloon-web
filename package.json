@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "sso": "aws sso login --sso-session=ownballoon",
     "dev": "sst bind vite dev",
     "build": "vite build",
     "preview": "vite preview",

@@ -6,6 +6,7 @@ export default {
     return {
       name: "own-balloon-web",
       region: "us-east-1",
+      profile: _input.stage === "production" ? "ownballoon-prod" : "ownballoon-dev",
     };
   },
   stacks(app) {

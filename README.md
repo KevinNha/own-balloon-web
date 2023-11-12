@@ -1,38 +1,34 @@
-# create-svelte
+# Own Balloon Website 
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Technology
+Full-stack application built using SvelteKit + SST to deploy resources onto AWS
 
-## Creating a project
+## Local Development
 
-If you're seeing this, you've probably already done this step. Congrats!
+### SSO Configuration
+You must first setup the AWS SSO configurations on your local machine.
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+```
+# ~/.aws/config
 
-# create a new project in my-app
-npm create svelte@latest my-app
+[sso-session ownballoon]
+sso_start_url = https://ownballoon.awsapps.com/start#/
+sso_region = us-west-2
+
+[profile ownballoon-dev]
+sso_session = ownballoon
+sso_account_id = <account-id>
+sso_role_name = AdministratorAccess
+region = us-west-2
+
+[profile ownballoon-prod]
+sso_session = ownballoon
+sso_account_id = <account-id>
+sso_role_name = AdministratorAccess
+region = us-west-2
 ```
 
-## Developing
+The account ID can be found when you login to the SSO login portal.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+### Getting Temporary Credentials
+You can run `npm run sso` to run the script to get credentials.
