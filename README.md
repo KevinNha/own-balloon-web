@@ -3,6 +3,9 @@
 ## Technology
 Full-stack application built using SvelteKit + SST to deploy resources onto AWS
 
+### Data Model
+You can find the data considerations [here](https://docs.google.com/document/d/1wf65bLiF0pQ_0-geEHgPk9rS1O72RQ0ZHw0zD-Qug2o/edit?usp=sharing)
+
 ## Local Development
 
 ### SSO Configuration
