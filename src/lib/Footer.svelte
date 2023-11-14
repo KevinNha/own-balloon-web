@@ -14,7 +14,7 @@
 				<p>Burnaby, British Columbia, CA</p>
 				<p>+1 778 325 4602</p>
 				<p>info@ownballoon.com</p>
-				<a href="https://www.instagram.com/own_balloon/">
+				<a class="w-2" target="_blank" href="https://www.instagram.com/own_balloon/">
 					<Instagram />
 				</a>
 			</div>
