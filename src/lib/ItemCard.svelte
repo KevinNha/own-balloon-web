@@ -1,6 +1,5 @@
 <script lang="ts">
 	export let item: Item;
-	console.log(item);
 </script>
 
 <!-- TODO Category color mapping -->
