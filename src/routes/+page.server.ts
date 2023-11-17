@@ -1,21 +1,8 @@
-import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb'
-import { unmarshall } from '@aws-sdk/util-dynamodb';
+import type { PageServerLoad } from './$types';
+import { scanTable } from '$lib/server/dynamodb';
 
-export const load = async () => {
-  const tableName = process.env.TABLE_NAME
-  const db = new DynamoDBClient()
+export const load: PageServerLoad = async () => {
+	const tableName = process.env.TABLE_NAME;
 
-  const scan = new ScanCommand({
-    TableName: tableName,
-  })
-
-  const results = await db.send(scan);
-  if (results.Items && results.Items.length > 0) {
-    const unmarshalledData = results.Items.map(item => {
-      return unmarshall(item)
-    })
-    return { items: unmarshalledData } 
-  }
-
-  return { items: [] }
-}
+	return scanTable(tableName);
+};
