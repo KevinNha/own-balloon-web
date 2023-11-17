@@ -13,9 +13,9 @@
 		<a href="/" class="col-span-2">
 			<Logo class="w-36 h-16" />
 		</a>
-		<div class="flex flex-row self-center gap-6">
-			<Search />
-			<Cart />
+		<div class="flex flex-row self-center gap-2 justify-end">
+			<Search class="w-[25%] h-[25%] sm:w-[45%] md:h-[45%] md:w-[50%] md:h-[50%]" />
+			<Cart class="w-[25%] h-[25%] sm:w-[45%] sd:h-[45%] md:w-[50%] md:h-[50%]" />
 		</div>
 	</div>
 	<div class="border-y border-solid border-black py-3">
