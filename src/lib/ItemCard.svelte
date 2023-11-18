@@ -27,11 +27,11 @@
 				${Number(item.cost).toFixed(2)}
 			</p>
 			{#if item.prevCost}
-				<p
-					class="text-xs md:text-md lg:text-xs font-normal line-through decoration-[#F56E76]/40 decoration-4"
-				>
-					&nbsp;&nbsp;${Number(item.prevCost).toFixed(2)}&nbsp;&nbsp;
-				</p>
+				<div class="bg-[#F56E76]/40 h-1">
+					<p class="relative text-xs md:text-md lg:text-xs font-normal bottom-1.5">
+						&nbsp;&nbsp;{Number(item.prevCost).toFixed(2)}&nbsp;&nbsp;
+					</p>
+				</div>
 			{/if}
 		</div>
 	</div>
