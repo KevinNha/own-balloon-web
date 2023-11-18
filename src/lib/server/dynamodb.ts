@@ -21,7 +21,7 @@ export const getItemData = async (tableName?: string) => {
 	// 	const unmarshalledData = results.Items.map((item) => {
 	// 		return unmarshall(item);
 	// 	});
-	// 	return { items: unmarshalledData };
+	// 	return { items: unmarshalledData as Item[] };
 	// }
 
 	// return { items: [] };

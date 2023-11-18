@@ -7,11 +7,15 @@
 <!-- TODO clicking shopping cart adds to cart (global store)-->
 <div class="flex flex-col gap-4 items-center">
 	<div class="w-full h-min overflow-hidden">
-		<img
-			class="w-full hover:scale-110 transition duration-500 object-cover cursor-pointer"
-			src={item.imageURL}
-			alt={`Balloon image for ${item.productName}`}
-		/>
+		{#if item.imageURL}
+			<img
+				class="w-full hover:scale-110 transition duration-500 object-cover cursor-pointer"
+				src={`${item.imageURL}`}
+				alt={`Balloon image for ${item.productName}`}
+			/>
+		{:else}
+			<p>Loading image...</p>
+		{/if}
 	</div>
 	<div class="flex flex-col self-start text-center font-bold gap-4">
 		<div
