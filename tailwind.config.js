@@ -7,6 +7,9 @@ export default {
         sans: ['Roboto', 'sans-serif'],
         gravitas: ['Gravitas One', 'Cursive']
       },
+      backgroundImage: {
+        'gradient-135': 'linear-gradient(135deg, var(--tw-gradient-stops))'
+      }
     },
   },
   plugins: [],

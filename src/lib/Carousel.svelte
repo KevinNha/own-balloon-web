@@ -9,12 +9,13 @@
 	// TODO get images from backend
 	import carousel from './mock/carousel.png';
 	import carousel2 from './mock/carousel2.png';
+	import { ComparisonOperator } from '@aws-sdk/client-dynamodb';
 	const images = [carousel, carousel2, carousel, carousel2];
 
 	let flyTransitionConfigConfig = {};
 	function moveLeft() {
 		flyTransitionConfigConfig = { x: '100%', duration: 1500 };
-		if ($selectedImageIndex == 0) {
+		if ($selectedImageIndex <= 0) {
 			selectedImageIndex.update(() => images.length - 1);
 		} else {
 			selectedImageIndex.update((value) => value - 1);
@@ -23,7 +24,7 @@
 
 	function moveRight() {
 		flyTransitionConfigConfig = { x: '-100%', duration: 1500 };
-		if ($selectedImageIndex == images.length - 1) {
+		if ($selectedImageIndex >= images.length - 1) {
 			selectedImageIndex.update(() => 0);
 		} else {
 			selectedImageIndex.update((value) => value + 1);
@@ -36,48 +37,71 @@
 			moveRight();
 		}, 4500);
 	}
-	onMount(() => {
-		carouselTimer();
 
-		return () => {
-			clearInterval(interval);
-		};
+	$: {
+		console.log(interval);
+		clearInterval(interval);
+		carouselTimer();
+	}
+
+	onMount(() => {
+		return () => clearInterval(interval);
 	});
 </script>
 
-<div class="min-h-[300px] max-h-[500px] h-[30vh] relative">
-	<div class="overflow-hidden">
+<div class="h-[40vh] md:h-[526px] relative">
+	<div
+		class="overflow-hidden"
+		on:pointerover={() => clearInterval(interval)}
+		on:pointerout={() => carouselTimer()}
+	>
 		{#each images as image, index}
 			{#if index === $selectedImageIndex}
 				<div
-					on:pointerover={() => clearInterval(interval)}
-					on:pointerout={() => carouselTimer()}
 					out:fade
 					in:fly={flyTransitionConfigConfig}
 					class="bg-cover bg-center absolute inset-0 flex items-center justify-center"
 					style="background-image: url({image})"
 				>
-					<div class="text-left absolute w-1/3 left-1/2">
+					<div class="text-left absolute w-2/5 left-1/2">
 						<div class="flex flex-col gap-3">
-							<p class="text-sm text-[#323334] font-roboto font-bold">HEADLINE LOREM IP SUM</p>
-							<p class="text-3xl text-[#323334] font-gravitas font-bold mb-4">
+							<p class="text-xs md:text-sm text-[#323334] font-roboto font-bold">
+								HEADLINE LOREM IP SUM
+							</p>
+							<p
+								class="text-lg md:text-[44px] leading-snug text-[#323334] font-gravitas font-bold mb-4"
+							>
 								Flower Bouquet Long Title Example
 							</p>
 						</div>
-						<button class="bg-[#323334] text-white py-2 px-4">Shop Now</button>
+						<button
+							class="bg-[#323334] mt-4 text-xs text-white py-4 px-8 hover:bg-gradient-135 hover:from-[#EE9AE5] hover:to-[#5961F9]/100"
+							>SHOP NOW</button
+						>
 					</div>
-					<button on:click={moveLeft}>
-						<CarouselLeft
-							class="cursor-pointer absolute top-1/2 left-10 transform -translate-y-1/2 fill-[#323334]/20 hover:fill-[#323334]/60"
-						/>
-					</button>
-					<button on:click={moveRight}>
-						<CarouselRight
-							class="cursor-pointer absolute top-1/2 right-10 transform -translate-y-1/2 fill-[#323334]/20 hover:fill-[#323334]/60"
-						/>
-					</button>
 				</div>
 			{/if}
 		{/each}
+		<div>
+			<button on:click={moveLeft}>
+				<CarouselLeft
+					class="cursor-pointer absolute top-1/2 left-[72px] transform -translate-y-1/2 fill-[#323334]/20 hover:fill-[#323334]/60"
+				/>
+			</button>
+			<button on:click={moveRight}>
+				<CarouselRight
+					class="cursor-pointer absolute top-1/2 right-[72px] transform -translate-y-1/2 fill-[#323334]/20 hover:fill-[#323334]/60"
+				/>
+			</button>
+			<div class="absolute bottom-6 right-10 flex flex-row gap-4">
+				{#each { length: images.length } as _, index}
+					{#if index === $selectedImageIndex}
+						<button in:fade={{ duration: 1500 }} class="h-4 w-10 rounded-full bg-[#323334]/70" />
+					{:else}
+						<button on:click={() => moveRight()} class="h-4 w-4 rounded-full bg-[#323334]/20" />
+					{/if}
+				{/each}
+			</div>
+		</div>
 	</div>
 </div>
