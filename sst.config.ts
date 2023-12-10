@@ -20,6 +20,14 @@ export default {
 				primaryIndex: { partitionKey: 'id' }
 			});
 
+			const categoriesTable = new Table(stack, 'Categories', {
+				fields: {
+					name: 'string',
+					order: 'number'
+				},
+				primaryIndex: { partitionKey: 'name', sortKey: 'order' }
+			});
+
 			const carouselTable = new Table(stack, 'CarouselItems', {
 				fields: {
 					id: 'string', // UUID
@@ -35,7 +43,7 @@ export default {
 			});
 
 			const site = new SvelteKitSite(stack, 'site', {
-				bind: [itemsTable, carouselTable, imagesBucket],
+				bind: [itemsTable, categoriesTable, carouselTable, imagesBucket],
 				environment: {
 					IMAGES_CLOUDFRONT_URL: imagesCloudFront.domainName
 				}

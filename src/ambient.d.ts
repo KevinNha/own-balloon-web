@@ -9,3 +9,10 @@ type Item = {
 	prevCost?: string;
 	productName: string;
 };
+
+type Category = {
+	name: string;
+	order: number;
+	imageBucketKey: string;
+	imageURL?: string;
+};

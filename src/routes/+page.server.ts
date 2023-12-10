@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
 import { Table } from 'sst/node/table';
-import { getItemData } from '$lib/server/dynamodb';
+import { getCategoriesData, getItemData } from '$lib/server/dynamodb';
 
 export const load: PageServerLoad = async () => {
 	const { items } = await getItemData(Table.Items.tableName);
@@ -9,5 +9,11 @@ export const load: PageServerLoad = async () => {
 		item.imageURL = imgURL;
 	});
 
-	return { items };
+	const { categories } = await getCategoriesData(Table.Categories.tableName);
+	categories.map(async (category: Category) => {
+		const imgURL = `https://${process.env.IMAGES_CLOUDFRONT_URL}/${category.imageBucketKey}`;
+		category.imageURL = imgURL;
+	});
+
+	return { items, categories };
 };

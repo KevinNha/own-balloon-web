@@ -8,7 +8,7 @@
 		'bg-gradient-to-r from-[#EE9AE5] to-[#5961F9] inline-block text-transparent bg-clip-text';
 </script>
 
-<div class="mx-[74px] my-[48px] flex flex-col flex gap-6">
+<div class="mx-[72px] my-[48px] flex flex-col flex gap-6">
 	<div class="flex flex-row justify-between max-h-60">
 		<a href="/" class="col-span-2">
 			<Logo class="w-36 h-16" />

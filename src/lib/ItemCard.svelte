@@ -4,12 +4,12 @@
 
 <!-- TODO Category color mapping -->
 <!-- TODO image links to product detail page -->
-<!-- TODO clicking shopping cart adds to cart (global store)-->
-<div class="flex flex-col gap-4 items-center">
+<!-- TODO add cart icon - clicking adds to cart (global store)-->
+<div class="flex flex-col gap-6 items-center">
 	<div class="w-full h-min overflow-hidden">
 		{#if item.imageURL}
 			<img
-				class="w-full hover:scale-110 transition duration-500 object-cover cursor-pointer"
+				class="w-full hover:scale-110 object-cover cursor-pointer"
 				src={`${item.imageURL}`}
 				alt={`Balloon image for ${item.productName}`}
 			/>
@@ -17,15 +17,17 @@
 			<p>Loading image...</p>
 		{/if}
 	</div>
-	<div class="flex flex-col self-start text-center font-bold gap-4">
-		<div
-			class="rounded-full w-fit bg-[#5C90F6]/10 text-[#5C90F6] px-2.5 py-1 text-xs md:text-sm lg:text-xs"
-		>
-			{item.category.toUpperCase()}
+	<div class="flex flex-col self-start text-center font-bold gap-6 mb-6 w-full">
+		<div class="flex flex-col gap-4">
+			<div
+				class="rounded-full w-fit bg-[#5C90F6]/10 text-[#5C90F6] px-2.5 py-1 text-xs md:text-sm lg:text-xs"
+			>
+				{item.category.toUpperCase()}
+			</div>
+			<p class="text-sm md:text-base lg:text-sm text-left">
+				{item.productName} - {item.colors.replaceAll(',', ' / ')}
+			</p>
 		</div>
-		<p class="text-sm md:text-base lg:text-sm text-left">
-			{item.productName} - {item.colors.replaceAll(',', ' / ')}
-		</p>
 		<div class="flex flex-row items-center gap-3">
 			<p class="text-base md:text-lg lg:text-base whitespace-break-spaces">
 				${Number(item.cost).toFixed(2)}

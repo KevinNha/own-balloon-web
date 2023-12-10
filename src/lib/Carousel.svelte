@@ -9,7 +9,6 @@
 	// TODO get images from backend
 	import carousel from './mock/carousel.png';
 	import carousel2 from './mock/carousel2.png';
-	import { ComparisonOperator } from '@aws-sdk/client-dynamodb';
 	const images = [carousel, carousel2, carousel, carousel2];
 
 	let flyTransitionConfigConfig = {};
@@ -39,7 +38,6 @@
 	}
 
 	$: {
-		console.log(interval);
 		clearInterval(interval);
 		carouselTimer();
 	}
