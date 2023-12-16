@@ -2,6 +2,8 @@ import type { SSTConfig } from 'sst';
 import { Distribution } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { Bucket, Table, SvelteKitSite } from 'sst/constructs';
+import { EmailSubscription } from 'aws-cdk-lib/aws-sns-subscriptions';
+import { Topic } from 'aws-cdk-lib/aws-sns';
 
 export default {
 	config(_input) {
@@ -12,7 +14,7 @@ export default {
 		};
 	},
 	stacks(app) {
-		app.stack(function Site({ stack }) {
+		app.stack(function Site({ stack, app }) {
 			const itemsTable = new Table(stack, 'Items', {
 				fields: {
 					id: 'string'
@@ -42,12 +44,21 @@ export default {
 				defaultBehavior: { origin: new S3Origin(imagesBucket.cdk.bucket) }
 			});
 
+			const contactEmailSNSTopic = new Topic(stack, 'contactEmailSNSTopic');
+			contactEmailSNSTopic.addSubscription(
+				app.stage === 'prod'
+					? new EmailSubscription('info@ownballoon.com ')
+					: new EmailSubscription('developer.ownballoon@gmail.com')
+			);
+
 			const site = new SvelteKitSite(stack, 'site', {
 				bind: [itemsTable, categoriesTable, carouselTable, imagesBucket],
 				environment: {
-					IMAGES_CLOUDFRONT_URL: imagesCloudFront.domainName
+					IMAGES_CLOUDFRONT_URL: imagesCloudFront.domainName,
+					CONTACT_SNS_TOPIC_ARN: contactEmailSNSTopic.topicArn
 				}
 			});
+			site.attachPermissions([contactEmailSNSTopic]);
 			stack.addOutputs({
 				url: site.url
 			});

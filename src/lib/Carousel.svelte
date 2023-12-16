@@ -5,6 +5,7 @@
 	import { selectedImageIndex } from '../store';
 	import CarouselLeft from './assets/CarouselLeft.svelte';
 	import CarouselRight from './assets/CarouselRight.svelte';
+	import HoverButton from './HoverButton.svelte';
 
 	// TODO get images from backend
 	import carousel from './mock/carousel.png';
@@ -72,10 +73,7 @@
 								Flower Bouquet Long Title Example
 							</p>
 						</div>
-						<button
-							class="bg-[#323334] mt-4 text-xs text-white py-4 px-8 hover:bg-gradient-135 hover:from-[#EE9AE5] hover:to-[#5961F9]/100"
-							>SHOP NOW</button
-						>
+						<HoverButton text="SHOP NOW" />
 					</div>
 				</div>
 			{/if}
