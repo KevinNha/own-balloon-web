@@ -14,7 +14,7 @@ export default {
 		};
 	},
 	stacks(app) {
-		app.stack(function Site({ stack, app }) {
+		app.stack(function Site({ stack }) {
 			const itemsTable = new Table(stack, 'Items', {
 				fields: {
 					id: 'string'
@@ -46,7 +46,7 @@ export default {
 
 			const contactEmailSNSTopic = new Topic(stack, 'contactEmailSNSTopic');
 			contactEmailSNSTopic.addSubscription(
-				app.stage === 'prod'
+				stack.stage === 'prod'
 					? new EmailSubscription('info@ownballoon.com ')
 					: new EmailSubscription('developer.ownballoon@gmail.com')
 			);
@@ -56,11 +56,18 @@ export default {
 				environment: {
 					IMAGES_CLOUDFRONT_URL: imagesCloudFront.domainName,
 					CONTACT_SNS_TOPIC_ARN: contactEmailSNSTopic.topicArn
+				},
+				customDomain: {
+					domainName: stack.stage === 'prod' ? 'ownballoon.com' : `${stack.stage}.ownballoon.com`,
+					domainAlias:
+						stack.stage === 'prod' ? 'www.ownballoon.com' : `www.${stack.stage}.ownballoon.com`,
+					hostedZone: 'ownballoon.com'
 				}
 			});
 			site.attachPermissions([contactEmailSNSTopic]);
 			stack.addOutputs({
-				url: site.url
+				url: site.url,
+				Site: site.customDomainUrl || site.url
 			});
 		});
 	}
