@@ -10,13 +10,11 @@ export const actions = {
 
 		try {
 			await sendContactEmail({ name, email, message });
-			return {
-				statusCode: 200,
-				body: JSON.stringify({ message: 'Message sent' })
-			};
+			return { success: true };
 		} catch (error) {
 			console.error(error);
 			return {
+				success: false,
 				statusCode: 500,
 				body: JSON.stringify({ message: 'Failed to send message' })
 			};
