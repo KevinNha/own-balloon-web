@@ -8,6 +8,7 @@
 	import RightArrow from '$lib/assets/RightArrow.svelte';
 	import AboutUsImage from '$lib/assets/AboutUsImage.png';
 	import type { PageData } from './$types';
+	import Contact from '$lib/Contact.svelte';
 
 	export let data: PageData;
 	const featuredItems: Item[] = data.items.sort((a, b) => a.order - b.order);
@@ -78,4 +79,5 @@
 			<img src={AboutUsImage} alt="About us" />
 		</div>
 	</div>
+	<Contact />
 </div>
