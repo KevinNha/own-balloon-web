@@ -32,7 +32,7 @@
 	</div>
 	<div class="flex flex-col self-start text-center font-bold gap-9 my-9 mx-6">
 		<p class="text-sm md:text-base lg:text-sm text-left">
-			{categoryItem.name.toUpperCase()}
+			CATEGORY{categoryItem.id}: {categoryItem.name.toUpperCase()}
 		</p>
 		<button
 			class={hovered

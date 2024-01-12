@@ -24,10 +24,10 @@ export default {
 
 			const categoriesTable = new Table(stack, 'Categories', {
 				fields: {
-					name: 'string',
+					id: 'string',
 					order: 'number'
 				},
-				primaryIndex: { partitionKey: 'name', sortKey: 'order' }
+				primaryIndex: { partitionKey: 'id', sortKey: 'order' }
 			});
 
 			const carouselTable = new Table(stack, 'CarouselItems', {

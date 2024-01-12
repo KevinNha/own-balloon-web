@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { setContext } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Carousel from '$lib/Carousel.svelte';
 	import CategoryCard from '$lib/CategoryCard.svelte';
@@ -9,8 +10,9 @@
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	const featuredItems: Item[] = data.items;
-	const categories: Category[] = data.categories;
+	const featuredItems: Item[] = data.items.sort((a, b) => a.order - b.order);
+	const categories: Category[] = data.categories.sort((a, b) => a.order - b.order);
+	setContext('categories', categories);
 
 	const gradientText1 =
 		'bg-gradient-to-r from-[#EE9AE5] to-[#B383ED]/100 text-transparent bg-clip-text';
