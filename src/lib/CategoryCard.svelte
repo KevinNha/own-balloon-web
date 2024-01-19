@@ -31,7 +31,7 @@
 		{/if}
 	</div>
 	<div class="flex flex-col self-start text-center font-bold gap-9 my-9 mx-6">
-		<p class="text-sm md:text-base lg:text-sm text-left">
+		<p class="text-sm md:text-base lg:text-base text-left">
 			CATEGORY{categoryItem.id}: {categoryItem.name.toUpperCase()}
 		</p>
 		<button

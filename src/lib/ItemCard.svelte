@@ -32,18 +32,18 @@
 			>
 				{categoryData?.name.toUpperCase()}
 			</div>
-			<p class="text-sm md:text-base lg:text-sm text-left">
+			<p class="text-sm md:text-base lg:text-lg text-left">
 				{item.productName}
 				{item.colors ? ' - ' + item.colors.replaceAll(',', ' / ') : ''}
 			</p>
 		</div>
 		<div class="flex flex-row items-center gap-3">
-			<p class="text-base md:text-lg lg:text-base whitespace-break-spaces">
+			<p class="text-base md:text-lg lg:text-2xl whitespace-break-spaces">
 				${Number(cost).toFixed(2)}{item.cost.split(' ').length === 2 ? '~' : ''}
 			</p>
 			{#if item.prevCost}
 				<div class="bg-[#F56E76]/40 h-1">
-					<p class="relative text-xs md:text-md lg:text-xs font-normal bottom-1.5">
+					<p class="relative text-xs md:text-md lg:text-lg font-normal bottom-2.5">
 						&nbsp;&nbsp;{Number(item.prevCost).toFixed(2)}&nbsp;&nbsp;
 					</p>
 				</div>

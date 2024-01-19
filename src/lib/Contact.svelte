@@ -1,5 +1,5 @@
 <script lang="ts">
-	import HoverButton from "$lib/HoverButton.svelte"
+	import HoverButton from '$lib/HoverButton.svelte';
 
 	export let submitted = false;
 </script>
@@ -7,7 +7,7 @@
 {#if submitted}
 	<div class="my-20 flex flex-col w-full">
 		<div class="flex flex-col gap-6">
-			<h1 class="font-gravitas text-xs md:text-2xl text-center">contact us</h1>
+			<h1 class="font-gravitas text-xs md:text-3xl text-center">Contact Us</h1>
 			<p class="font-roboto text-center">
 				Your inquiry has been sent and we will get back to you within 48 hours.
 			</p>
@@ -17,7 +17,7 @@
 	<div class="my-20 flex flex-col gap-12 w-full">
 		<div class="flex justify-center">
 			<div class="flex flex-col gap-6 w-1/2">
-				<h1 class="font-gravitas text-xs md:text-2xl text-center">contact us</h1>
+				<h1 class="font-gravitas text-xs md:text-3xl text-center">Contact Us</h1>
 				<p class="font-roboto font-bold text-center">
 					PLEASE FILL OUT THE FORM BELOW OR EMAIL US AT
 					<a

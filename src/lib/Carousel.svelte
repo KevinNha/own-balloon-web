@@ -31,6 +31,10 @@
 		}
 	}
 
+	function setSelected(index: number) {
+		selectedImageIndex.update(() => index);
+	}
+
 	let interval: any;
 	function carouselTimer() {
 		interval = setInterval(() => {
@@ -51,8 +55,8 @@
 <div class="h-[40vh] md:h-[526px] relative">
 	<div
 		class="overflow-hidden"
-		on:pointerover={() => clearInterval(interval)}
-		on:pointerout={() => carouselTimer()}
+		on:pointerenter={() => clearInterval(interval)}
+		on:pointerleave={() => carouselTimer()}
 	>
 		{#each images as image, index}
 			{#if index === $selectedImageIndex}
@@ -92,9 +96,16 @@
 			<div class="absolute bottom-6 right-10 flex flex-row gap-4">
 				{#each { length: images.length } as _, index}
 					{#if index === $selectedImageIndex}
-						<button in:fade={{ duration: 1500 }} class="h-4 w-10 rounded-full bg-[#323334]/70" />
+						<button
+							in:fade={{ duration: 1500 }}
+							on:click={() => setSelected(index)}
+							class="h-4 w-10 rounded-full bg-[#323334]/70"
+						/>
 					{:else}
-						<button on:click={() => moveRight()} class="h-4 w-4 rounded-full bg-[#323334]/20" />
+						<button
+							on:click={() => setSelected(index)}
+							class="h-4 w-4 rounded-full bg-[#323334]/20"
+						/>
 					{/if}
 				{/each}
 			</div>

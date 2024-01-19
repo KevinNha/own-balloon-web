@@ -24,7 +24,7 @@
 </script>
 
 <div class="flex flex-col">
-	<div class="left-0 right-0 relative">
+	<div class="mx-[72px] relative">
 		<Carousel />
 	</div>
 	<div class="mx-[72px] flex flex-col">
